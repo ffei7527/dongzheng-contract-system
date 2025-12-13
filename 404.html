@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面未找到 - 东证融汇合同系统</title>
+    <script>
+        // GitHub Pages 404 处理 - 重定向到首页
+        var pathSegmentsToKeep = 1;
+        var l = window.location;
+        l.replace(
+            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+            l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+            l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash
+        );
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>页面未找到</h1>
+        <p>正在跳转到首页...</p>
+        <p><a href="./">如果未自动跳转，请点击这里</a></p>
+    </div>
+</body>
+</html>
+
+

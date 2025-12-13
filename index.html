@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f2937" />
+    <meta name="description" content="东证融汇合同系统 - 专业的合同管理与电子签约平台" />
+    <title>东证融汇合同系统</title>
+    <link rel="manifest" href="./manifest.json" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding: 0;
+      }
+      /* Custom scrollbar for sidebar */
+      .sidebar-scroll::-webkit-scrollbar {
+        width: 6px;
+      }
+      .sidebar-scroll::-webkit-scrollbar-track {
+        background: #1f2937;
+      }
+      .sidebar-scroll::-webkit-scrollbar-thumb {
+        background-color: #374151;
+        border-radius: 20px;
+      }
+    </style>
+    <!-- 使用 CDN 版本的 React，避免模块加载问题 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      // 简化版 App 组件
+      function App() {
+        const [activePage, setActivePage] = useState('CONTRACTS');
+
+        const pages = [
+          { id: 'CONTRACTS', name: '合同管理', icon: '📄' },
+          { id: 'ROLES', name: '角色管理', icon: '👥' },
+          { id: 'AGENTS', name: '代理管理', icon: '🤝' },
+          { id: 'MENUS', name: '菜单规则', icon: '📋' },
+          { id: 'CONFIG', name: '系统配置', icon: '⚙️' },
+          { id: 'ATTACHMENTS', name: '附件管理', icon: '📎' },
+          { id: 'PROFILE', name: '个人资料', icon: '👤' }
+        ];
+
+        const renderContent = () => {
+          const pageNames = {
+            'CONTRACTS': '合同管理',
+            'ROLES': '角色管理',
+            'AGENTS': '代理管理',
+            'MENUS': '菜单规则',
+            'CONFIG': '系统配置',
+            'ATTACHMENTS': '附件管理',
+            'PROFILE': '个人资料'
+          };
+
+          return (
+            <div className="p-8">
+              <h1 className="text-3xl font-bold text-gray-800 mb-6">
+                {pageNames[activePage]}
+              </h1>
+              <div className="bg-white rounded-lg shadow p-6">
+                <p className="text-gray-600">
+                  这是 {pageNames[activePage]} 页面。系统已成功加载！
+                </p>
+                <div className="mt-4 p-4 bg-blue-50 rounded">
+                  <p className="text-blue-800">
+                    💡 提示：这是一个演示版本。完整功能需要启动开发服务器。
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        return (
+          <div className="flex h-screen w-full overflow-hidden">
+            {/* 侧边栏 */}
+            <div className="w-64 bg-gray-800 text-white sidebar-scroll overflow-y-auto">
+              <div className="p-6">
+                <h1 className="text-xl font-bold mb-8">东证融汇合同系统</h1>
+                <nav className="space-y-2">
+                  {pages.map(page => (
+                    <button
+                      key={page.id}
+                      onClick={() => setActivePage(page.id)}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                        activePage === page.id
+                          ? 'bg-blue-600 text-white'
+                          : 'text-gray-300 hover:bg-gray-700'
+                      }`}
+                    >
+                      <span className="mr-2">{page.icon}</span>
+                      {page.name}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+            </div>
+
+            {/* 主内容区 */}
+            <div className="flex flex-col flex-1 overflow-hidden">
+              {/* 顶部栏 */}
+              <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    {pages.find(p => p.id === activePage)?.name}
+                  </h2>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-sm text-gray-600">欢迎使用</span>
+                  </div>
+                </div>
+              </header>
+
+              {/* 内容区域 */}
+              <main className="flex-1 overflow-auto bg-[#f3f4f6]">
+                {renderContent()}
+              </main>
+            </div>
+          </div>
+        );
+      }
+
+      // 渲染应用
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

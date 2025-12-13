@@ -1,0 +1,48 @@
+# GitHub Pages 部署命令
+
+## 首次部署
+
+1. 初始化 Git 仓库（如果还没有）：
+git init
+
+2. 添加所有文件：
+git add .
+
+3. 提交更改：
+git commit -m "Initial commit: 东证融汇合同系统"
+
+4. 连接到 GitHub 仓库（替换 YOUR_USERNAME 和 YOUR_REPO_NAME）：
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git branch -M main
+git push -u origin main
+
+## 后续更新
+
+1. 添加更改：
+git add .
+
+2. 提交更改：
+git commit -m "更新描述"
+
+3. 推送到 GitHub：
+git push
+
+GitHub Actions 会自动构建和部署。
+
+## 手动部署（可选）
+
+如果需要手动部署到 gh-pages 分支：
+
+1. 安装 gh-pages：
+npm install --save-dev gh-pages
+
+2. 运行部署：
+npm run deploy
+
+## 注意事项
+
+- 确保在 GitHub 仓库设置中启用了 GitHub Pages
+- 如果使用 GitHub Actions，Source 选择 "GitHub Actions"
+- 如果手动部署，Source 选择 "gh-pages" 分支
+
+
