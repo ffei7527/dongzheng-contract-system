@@ -33,22 +33,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: |
-          echo "=== Starting build ==="
-          npm run build 2>&1 | tee build.log
-        continue-on-error: true
-
-      - name: Check build result
-        run: |
-          if [ -d "dist" ]; then
-            echo "✅ Build succeeded, dist folder exists"
-            ls -la dist/
-          else
-            echo "❌ Build failed, dist folder not found"
-            echo "=== Build log ==="
-            cat build.log || echo "No build log"
-            exit 1
-          fi
+        run: npm run build
 
       - name: List dist contents
         run: |
