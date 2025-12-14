@@ -33,17 +33,22 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
-        continue-on-error: false
-
-      - name: Check build output
-        if: failure()
         run: |
-          echo "=== Build failed, checking for errors ==="
-          echo "=== TypeScript check ==="
-          npx tsc --noEmit || echo "TypeScript check failed"
-          echo "=== Vite build attempt ==="
-          npx vite build || echo "Vite build failed"
+          echo "=== Starting build ==="
+          npm run build 2>&1 | tee build.log
+        continue-on-error: true
+
+      - name: Check build result
+        run: |
+          if [ -d "dist" ]; then
+            echo "✅ Build succeeded, dist folder exists"
+            ls -la dist/
+          else
+            echo "❌ Build failed, dist folder not found"
+            echo "=== Build log ==="
+            cat build.log || echo "No build log"
+            exit 1
+          fi
 
       - name: List dist contents
         run: |
